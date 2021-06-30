@@ -78,7 +78,7 @@
                         shadow += sampleDepth < depth ? _ShadowStrength: 1;
                     }
                 }
-                return shadow /= 9;
+                return saturate(shadow *= 0.1111111);
             }
 
 
@@ -113,7 +113,7 @@
 
                 attenuation = PCFSample(ndcpos.z + 0.00005, uvpos.xy) ;
 
-                return lerp(b, s, attenuation);
+                return lerp(b, s + 0.2, attenuation);
                 //fixed4 color = lerp(0, 1, d * step(depth, ndcpos.z + 0.00005));
                 // fixed4 color = lerp(s, b, d * step(attenuation, ndcpos.z + 0.00005));
                 // return color;
